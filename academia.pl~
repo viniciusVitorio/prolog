@@ -1,4 +1,3 @@
-% Base de conhecimento com treinos definidos
 treino(ganhar_massa, avancado, tempo_aberto, 'Treino de Hipertrofia Avançado: 5 séries de agachamento, supino, levantamento terra').
 treino(ganhar_massa, intermediario, tempo_aberto, 'Treino de Hipertrofia Intermediário: 4 séries de agachamento, supino, remada').
 treino(ganhar_massa, iniciante, tempo_limitado, 'Treino Básico para Ganho de Massa: 3 séries de supino, leg press e rosca direta').

@@ -1,5 +1,3 @@
-% Desenvolvido por: Vinicius Vitório e Pablo Boing.
-
 :- dynamic motor_nao_liga/0, luzes_fracas/0, barulho_ao_frear/0, pedal_freio_macio/0, nivel_de_oleo_baixo/0.
 
 % Fatos: Sintomas possíveis para problemas de veículos
