@@ -1,0 +1,45 @@
+% Desenvolvido por: Vinicius Vitório e Pablo Boing.
+
+:- dynamic motor_nao_liga/0, luzes_fracas/0, barulho_ao_frear/0, pedal_freio_macio/0, nivel_de_oleo_baixo/0.
+
+% Fatos: Sintomas possíveis para problemas de veículos
+sintoma(motor_nao_liga).
+sintoma(luzes_fracas).
+sintoma(barulho_ao_frear).
+sintoma(pedal_freio_macio).
+sintoma(nivel_de_oleo_baixo).
+
+problema(bateria_fraca) :- motor_nao_liga, luzes_fracas.
+problema(freio_desgastado) :- barulho_ao_frear, pedal_freio_macio.
+problema(vazamento_de_oleo) :- nivel_de_oleo_baixo.
+
+solucao(bateria_fraca) :- write('Solução: Verifique a bateria e, se necessário, substitua-a.'), nl.
+solucao(freio_desgastado) :- write('Solução: Verifique o sistema de freios, especialmente as pastilhas e os discos.'), nl.
+solucao(vazamento_de_oleo) :- write('Solução: Verifique se há vazamentos no sistema de óleo e complete o nível de óleo.'), nl.
+
+seguranca(bateria_fraca) :- write('Atenção: Se o carro não ligar mesmo após a troca da bateria, leve-o a um mecânico.'), nl.
+seguranca(freio_desgastado) :- write('Atenção: Se o barulho persistir ou os freios estiverem falhando, leve o carro ao mecânico imediatamente.'), nl.
+seguranca(vazamento_de_oleo) :- write('Atenção: Se houver vazamento de óleo, o carro pode sofrer danos graves. Leve o carro ao mecânico.'), nl.
+
+perguntar_sintoma(Sintoma) :-
+    write('Você percebeu o seguinte sintoma no seu carro: '), write(Sintoma), write('? (s/n): '),
+    read(Resposta),
+    (Resposta == s -> assert(Sintoma) ; true).
+
+examinar :-
+    perguntar_sintoma(motor_nao_liga),
+    perguntar_sintoma(luzes_fracas),
+    perguntar_sintoma(barulho_ao_frear),
+    perguntar_sintoma(pedal_freio_macio),
+    perguntar_sintoma(nivel_de_oleo_baixo),
+
+    (problema(Problema) ->
+        write('Diagnóstico provável: '), write(Problema), nl,
+        solucao(Problema),
+        seguranca(Problema)
+    ;
+        write('Não foi possível identificar o problema. Consulte um mecânico!'), nl
+    ),
+
+   retractall(motor_nao_liga), retractall(luzes_fracas), retractall(barulho_ao_frear),
+    retractall(pedal_freio_macio), retractall(nivel_de_oleo_baixo).

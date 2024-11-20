@@ -1,0 +1,32 @@
+% Base de conhecimento com treinos definidos
+treino(ganhar_massa, avancado, tempo_aberto, 'Treino de Hipertrofia Avançado: 5 séries de agachamento, supino, levantamento terra').
+treino(ganhar_massa, intermediario, tempo_aberto, 'Treino de Hipertrofia Intermediário: 4 séries de agachamento, supino, remada').
+treino(ganhar_massa, iniciante, tempo_limitado, 'Treino Básico para Ganho de Massa: 3 séries de supino, leg press e rosca direta').
+
+treino(emagrecer, avancado, tempo_aberto, 'Treino de Alta Intensidade: 5 séries de corrida intervalada, burpees e bicicleta').
+treino(emagrecer, intermediario, tempo_limitado, 'Treino Funcional: 3 séries de polichinelos, mountain climbers e prancha').
+treino(emagrecer, iniciante, tempo_aberto, 'Treino Leve de Cardio: 30 minutos de caminhada e exercícios aeróbicos leves').
+
+treino(melhorar_condicionamento, avancado, tempo_aberto, 'Treino CrossFit Avançado: circuito de 5 exercícios funcionais intensos').
+treino(melhorar_condicionamento, intermediario, tempo_limitado, 'Treino Cardio Funcional: 3 séries de corrida leve, bicicleta e prancha').
+treino(melhorar_condicionamento, iniciante, tempo_aberto, 'Treino Básico de Resistência: 20 minutos de corrida leve e alongamentos').
+
+treino(ganhar_forca, avancado, tempo_aberto, 'Treino de Força Avançado: 5 séries de levantamento terra, agachamento e supino').
+treino(ganhar_forca, intermediario, tempo_limitado, 'Treino de Força Intermediário: 3 séries de levantamento terra e supino').
+treino(ganhar_forca, iniciante, tempo_limitado, 'Treino Básico de Força: 2 séries de leg press e supino com peso moderado').
+
+% Regra principal para iniciar o sistema de recomendação
+iniciar :-
+    writeln('Bem-vindo ao sistema de recomendação de treinos de academia!'),
+    writeln('Qual é o seu objetivo? (ganhar_massa, emagrecer, melhorar_condicionamento, ganhar_forca):'),
+    read(Objetivo),
+    writeln('Qual é o seu nível de experiência? (iniciante, intermediario, avancado):'),
+    read(Experiencia),
+    writeln('Quanto tempo você tem disponível para treinar? (tempo_limitado, tempo_aberto):'),
+    read(Tempo),
+    (treino(Objetivo, Experiencia, Tempo, Recomendacao) ->
+        writeln('Recomendação de treino:'),
+        writeln(Recomendacao)
+    ;
+        writeln('Desculpe, não encontramos um plano para o seu perfil. Consulte um treinador.')
+    ).

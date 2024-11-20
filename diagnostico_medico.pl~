@@ -1,0 +1,45 @@
+% Desenvolvido por: Vinicius
+% Sistema de Diagnóstico Médico - Base de sintomas e doenças
+
+% Declara sintomas como dinâmicos
+:- dynamic febre/0, tosse/0, cansaco/0, dor_de_garganta/0, dor_muscular/0, dor_de_cabeca/0.
+
+% Fatos: Sintomas possíveis
+sintoma(febre).
+sintoma(dor_de_cabeca).
+sintoma(tosse).
+sintoma(dor_de_garganta).
+sintoma(dor_muscular).
+sintoma(cansaco).
+
+% Regras: Relações entre sintomas e diagnósticos
+doenca(gripe) :- febre, tosse, cansaco.
+doenca(infeccao_viral) :- febre, dor_de_garganta, dor_muscular.
+doenca(enxaqueca) :- dor_de_cabeca.
+
+% Regras auxiliares para verificar se um sintoma está presente
+perguntar_sintoma(Sintoma) :-
+    write('Você tem '), write(Sintoma), write('? (s/n): '),
+    read(Resposta),
+    (Resposta == s -> assert(Sintoma) ; true).
+
+% Interação principal: diagnóstico
+diagnosticar :-
+    % Pergunta ao usuário sobre os sintomas
+    perguntar_sintoma(febre),
+    perguntar_sintoma(tosse),
+    perguntar_sintoma(cansaco),
+    perguntar_sintoma(dor_de_garganta),
+    perguntar_sintoma(dor_muscular),
+    perguntar_sintoma(dor_de_cabeca),
+
+    % Verifica as doenças com base nos sintomas informados
+    (doenca(Doenca) ->
+        write('Diagnóstico provável: '), write(Doenca), nl
+    ;
+        write('Não foi possível identificar a condição. Consulte um médico!'), nl
+    ),
+
+    % Limpa a memória dos sintomas para novas consultas
+    retractall(febre), retractall(tosse), retractall(cansaco),
+    retractall(dor_de_garganta), retractall(dor_muscular), retractall(dor_de_cabeca).
